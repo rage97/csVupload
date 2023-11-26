@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Upload App</title>
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">CSV Upload App</h1>
+    
+    <!-- Upload Form -->
+    <form action="/upload" method="post" enctype="multipart/form-data" class="mb-3">
+      <div class="form-group">
+        <label for="csvFile">Choose a CSV file to upload:</label>
+        <input type="file" class="form-control" id="csvFile" name="csvFile" accept=".csv">
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    
+    <div>
+      <h2>Uploaded Files</h2>
+      <% if (files.length > 0) { %>
+        <ul class="list-group">
+          <% files.forEach(file => { %>
+            <li class="list-group-item">
+              <%= file.filename %> - 
+              <a href="/csv/<%= file._id %>" class="btn btn-info btn-sm">View Details</a> - 
+              
+              <!-- Delete Button Form -->
+              <form action="/delete/<%= file._id %>" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No files uploaded yet.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Add Bootstrap JS and Popper.js scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
